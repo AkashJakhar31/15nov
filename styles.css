@@ -174,18 +174,17 @@ p {
 }
 /* ... (keep all your existing CSS above this) ... */
 
-/* Floating pictures in the background */
-/* Floating pictures (now brighter and above written content) */
+/* Floating pictures (faster and more of them) */
 .floating-photo {
     position: absolute;
     width: 100px; /* Adjust size as needed */
     height: auto;
-    opacity: 1.0; /* Fully visible for brightness */
-    filter: brightness(1.2); /* Boosts brightness by 20% for a vivid look */
+    opacity: 1.0; /* Fully visible */
+    filter: brightness(1.2); /* Brightness boost */
     pointer-events: none; /* Non-interactive */
-    animation: floatPhoto 15s infinite ease-in-out; /* Varied float */
-    z-index: 10; /* Above all content, below modal */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for definition */
+    animation: floatPhoto 10s infinite ease-in-out; /* Faster float (reduced from 15s) */
+    z-index: 10; /* Above content, below modal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for definition */
 }
 
 .floating-photo:nth-child(1) {
@@ -197,19 +196,31 @@ p {
 .floating-photo:nth-child(2) {
     top: 50%;
     right: 20%;
-    animation-delay: 5s;
+    animation-delay: 2s;
 }
 
 .floating-photo:nth-child(3) {
     bottom: 30%;
     left: 50%;
-    animation-delay: 10s;
+    animation-delay: 4s;
 }
 
 .floating-photo:nth-child(4) {
     top: 70%;
     right: 10%;
-    animation-delay: 7s;
+    animation-delay: 6s;
+}
+
+.floating-photo:nth-child(5) {
+    top: 10%;
+    left: 60%;
+    animation-delay: 8s; /* New photo 5 */
+}
+
+.floating-photo:nth-child(6) {
+    bottom: 60%;
+    right: 50%;
+    animation-delay: 10s; /* New photo 6 */
 }
 
 /* Updated keyframe for up/down/left/right floating */
