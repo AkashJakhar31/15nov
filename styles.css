@@ -175,14 +175,16 @@ p {
 /* ... (keep all your existing CSS above this) ... */
 
 /* Floating pictures in the background */
+/* Floating pictures in the background */
 .floating-photo {
     position: absolute;
     width: 100px; /* Adjust size as needed */
     height: auto;
-    opacity: 0.4; /* Semi-transparent so they don't overpower */
+    opacity: 0.7; /* Increased from 0.4 for better visibility */
     pointer-events: none; /* Non-interactive */
     animation: floatPhoto 15s infinite linear; /* Slower, longer float */
     z-index: 0; /* Behind content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Soft shadow for contrast against light background */
 }
 
 .floating-photo:nth-child(1) {
