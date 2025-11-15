@@ -150,3 +150,57 @@
     // Start the interaction
     updatePhotoPositions();
 </script>
+<!-- ... (keep all your existing HTML and JS above this) ... -->
+
+<script>
+    // ... (keep all your existing JS here) ...
+
+    // Updated: Cursor and touch interaction for floating photos
+    const photos = document.querySelectorAll('.floating-photo');
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Track mouse movement (desktop)
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // Track touch movement (mobile/tablet)
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        }
+    });
+
+    // Function to update photo positions based on cursor/touch
+    function updatePhotoPositions() {
+        photos.forEach((photo) => {
+            const rect = photo.getBoundingClientRect();
+            const photoCenterX = rect.left + rect.width / 2;
+            const photoCenterY = rect.top + rect.height / 2;
+
+            // Calculate distance from cursor/touch to photo center
+            const distanceX = mouseX - photoCenterX;
+            const distanceY = mouseY - photoCenterY;
+            const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+
+            // If cursor/touch is close (within 200px), attract the photo slightly
+            if (distance < 200) {
+                const attractionStrength = 0.02; // Gentle pull (adjust for stronger/weaker effect)
+                const offsetX = distanceX * attractionStrength;
+                const offsetY = distanceY * attractionStrength;
+
+                // Apply offset to the photo's transform (combines with floating animation)
+                photo.style.transform += ` translate(${offsetX}px, ${offsetY}px)`;
+            }
+        });
+
+        // Repeat the update for smooth interaction
+        requestAnimationFrame(updatePhotoPositions);
+    }
+
+    // Start the interaction
+    updatePhotoPositions();
+</script>
