@@ -102,3 +102,49 @@
     </script>
 </body>
 </html>
+<!-- ... (keep all your existing HTML and JS above this) ... -->
+
+<script>
+    // ... (keep all your existing JS here) ...
+
+    // New: Cursor interaction for floating photos
+    const photos = document.querySelectorAll('.floating-photo');
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Track mouse movement
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // Function to update photo positions based on cursor
+    function updatePhotoPositions() {
+        photos.forEach((photo) => {
+            const rect = photo.getBoundingClientRect();
+            const photoCenterX = rect.left + rect.width / 2;
+            const photoCenterY = rect.top + rect.height / 2;
+
+            // Calculate distance from mouse to photo center
+            const distanceX = mouseX - photoCenterX;
+            const distanceY = mouseY - photoCenterY;
+            const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+
+            // If mouse is close (within 200px), attract the photo slightly
+            if (distance < 200) {
+                const attractionStrength = 0.02; // Gentle pull (adjust for stronger/weaker effect)
+                const offsetX = distanceX * attractionStrength;
+                const offsetY = distanceY * attractionStrength;
+
+                // Apply offset to the photo's transform (combines with floating animation)
+                photo.style.transform += ` translate(${offsetX}px, ${offsetY}px)`;
+            }
+        });
+
+        // Repeat the update for smooth interaction
+        requestAnimationFrame(updatePhotoPositions);
+    }
+
+    // Start the interaction
+    updatePhotoPositions();
+</script>
